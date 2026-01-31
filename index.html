@@ -2,7 +2,8 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="theme-color" content="#2c3e50">
     <meta name="description" content="Formatter Laporan Harian Koramil 1609-05/Sukasada">
     <title>Formatter Laporan Koramil</title>
@@ -12,6 +13,9 @@
             padding: 0;
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-rendering: optimizeLegibility;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
         
         body {
@@ -19,6 +23,10 @@
             color: #333;
             line-height: 1.6;
             padding: 15px;
+            font-smooth: always;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
         }
         
         /* Header */
@@ -33,12 +41,16 @@
             color: #2c3e50;
             font-size: 20px;
             margin-bottom: 5px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.1);
         }
         
         .header h2 {
             color: #7f8c8d;
             font-size: 14px;
             font-weight: normal;
+            letter-spacing: 0.3px;
         }
         
         /* Main Layout */
@@ -84,6 +96,9 @@
             margin-bottom: 15px;
             padding-bottom: 8px;
             border-bottom: 1px solid #eee;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+            text-transform: uppercase;
         }
         
         /* Input Groups */
@@ -97,6 +112,8 @@
             font-weight: 600;
             color: #2c3e50;
             margin-bottom: 6px;
+            font-weight: 600;
+            letter-spacing: 0.2px;
         }
         
         .input-row {
@@ -117,6 +134,8 @@
             font-size: 13px;
             background: #fff;
             border-radius: 4px;
+            font-weight: 400;
+            letter-spacing: 0.1px;
         }
         
         input[type="text"]:focus,
@@ -151,9 +170,9 @@
             min-height: 400px;
             padding: 15px;
             border: 1px solid #e1e8ed;
-            font-family: 'Courier New', monospace;
+            font-family: 'Consolas', 'Courier New', monospace;
             font-size: 12px;
-            line-height: 1.5;
+            line-height: 1.6;
             background: #fafafa;
             color: #333;
             resize: none;
@@ -161,6 +180,8 @@
             border-radius: 4px;
             white-space: pre-wrap;
             word-wrap: break-word;
+            font-weight: 400;
+            letter-spacing: 0.1px;
         }
         
         .preview-textarea:focus {
@@ -238,6 +259,9 @@
             color: white;
             border-radius: 4px;
             transition: all 0.3s ease;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+            text-shadow: 0 1px 1px rgba(0,0,0,0.1);
         }
         
         button:hover {
@@ -333,7 +357,7 @@
             font-size: 14px;
         }
 
-        /* STYLE BARU UNTUK ROUNDED TEXT BOX DENGAN TOMBOL + DAN - */
+        /* STYLE UNTUK ROUNDED TEXT BOX */
         .kegiatan-container {
             margin-bottom: 20px;
         }
@@ -361,44 +385,56 @@
             font-weight: 600;
             color: #2c3e50;
             flex-grow: 1;
+            font-weight: 700;
+            letter-spacing: 0.2px;
         }
 
         .kegiatan-controls {
             display: flex;
             gap: 8px;
-        }
-
-        .add-btn, .remove-btn {
-            width: 35px;
-            height: 35px;
-            border-radius: 50%;
-            border: none;
-            display: flex;
             align-items: center;
-            justify-content: center;
+        }
+
+        /* TOMBOL DI HEADER (Untuk menambah item baru) - DIPERBAIKI */
+        .kegiatan-controls .add-btn,
+        .kegiatan-controls .remove-btn {
+            width: 28px !important;
+            height: 28px !important;
+            border-radius: 4px !important;
+            border: none !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
             cursor: pointer;
-            font-size: 16px;
-            font-weight: bold;
-            transition: all 0.2s;
-            color: white;
+            font-size: 14px !important;
+            font-weight: bold !important;
+            transition: all 0.2s !important;
+            color: white !important;
+            box-shadow: 0 2px 3px rgba(0,0,0,0.1);
+            padding: 0 !important;
+            margin: 0 !important;
         }
 
-        .add-btn {
-            background-color: #27ae60;
+        .kegiatan-controls .add-btn {
+            background-color: #27ae60 !important;
+            border: 1px solid #219653 !important;
         }
 
-        .add-btn:hover {
-            background-color: #219653;
-            transform: scale(1.05);
+        .kegiatan-controls .add-btn:hover {
+            background-color: #219653 !important;
+            transform: translateY(-1px) !important;
+            box-shadow: 0 3px 5px rgba(39, 174, 96, 0.3) !important;
         }
 
-        .remove-btn {
-            background-color: #e74c3c;
+        .kegiatan-controls .remove-btn {
+            background-color: #e74c3c !important;
+            border: 1px solid #c0392b !important;
         }
 
-        .remove-btn:hover {
-            background-color: #c0392b;
-            transform: scale(1.05);
+        .kegiatan-controls .remove-btn:hover {
+            background-color: #c0392b !important;
+            transform: translateY(-1px) !important;
+            box-shadow: 0 3px 5px rgba(231, 76, 60, 0.3) !important;
         }
 
         .kegiatan-content {
@@ -408,10 +444,11 @@
         .kegiatan-item {
             position: relative;
             margin-bottom: 15px;
+            padding-left: 45px !important;
         }
 
         .kegiatan-textarea-rounded {
-            width: 100%;
+            width: 100% !important;
             min-height: 80px;
             padding: 12px 15px;
             border: 1px solid #ddd;
@@ -423,6 +460,10 @@
             overflow: hidden;
             font-family: 'Segoe UI', sans-serif;
             transition: all 0.2s;
+            font-weight: 400;
+            letter-spacing: 0.1px;
+            line-height: 1.5;
+            margin-left: 0 !important;
         }
 
         .kegiatan-textarea-rounded:focus {
@@ -432,47 +473,56 @@
             box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.1);
         }
 
+        /* TOMBOL DI SAMPING ITEM (Inline controls) - DIPERBAIKI */
         .item-controls {
             position: absolute;
-            left: -45px;
-            top: 50%;
-            transform: translateY(-50%);
+            left: -40px !important;
+            top: 15px !important;
+            transform: none !important;
             display: flex;
             flex-direction: column;
-            gap: 5px;
+            gap: 8px !important;
         }
 
-        .item-add-btn, .item-remove-btn {
-            width: 35px;
-            height: 35px;
-            border-radius: 50%;
-            border: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .item-controls .item-add-btn,
+        .item-controls .item-remove-btn {
+            width: 28px !important;
+            height: 28px !important;
+            border-radius: 4px !important;
+            border: none !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
             cursor: pointer;
-            font-size: 16px;
-            font-weight: bold;
-            transition: all 0.2s;
-            color: white;
+            font-size: 14px !important;
+            font-weight: bold !important;
+            transition: all 0.2s !important;
+            color: white !important;
+            box-shadow: 0 2px 3px rgba(0,0,0,0.1);
+            padding: 0 !important;
+            margin: 0 !important;
         }
 
-        .item-add-btn {
-            background-color: #27ae60;
+        .item-controls .item-add-btn {
+            background-color: #27ae60 !important;
+            border: 1px solid #219653 !important;
         }
 
-        .item-add-btn:hover {
-            background-color: #219653;
-            transform: scale(1.05);
+        .item-controls .item-add-btn:hover {
+            background-color: #219653 !important;
+            transform: translateY(-1px) !important;
+            box-shadow: 0 3px 5px rgba(39, 174, 96, 0.3) !important;
         }
 
-        .item-remove-btn {
-            background-color: #e74c3c;
+        .item-controls .item-remove-btn {
+            background-color: #e74c3c !important;
+            border: 1px solid #c0392b !important;
         }
 
-        .item-remove-btn:hover {
-            background-color: #c0392b;
-            transform: scale(1.05);
+        .item-controls .item-remove-btn:hover {
+            background-color: #c0392b !important;
+            transform: translateY(-1px) !important;
+            box-shadow: 0 3px 5px rgba(231, 76, 60, 0.3) !important;
         }
 
         .kegiatan-instruction {
@@ -494,6 +544,8 @@
             font-size: 12px;
             font-weight: 600;
             color: #2c3e50;
+            font-weight: 600;
+            letter-spacing: 0.2px;
         }
 
         .data-value {
@@ -515,10 +567,39 @@
             font-weight: bold;
         }
         
+        /* Hover effects untuk semua tombol */
+        .kegiatan-controls .add-btn:active,
+        .kegiatan-controls .remove-btn:active,
+        .item-controls .item-add-btn:active,
+        .item-controls .item-remove-btn:active {
+            transform: translateY(1px) !important;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1) !important;
+        }
+
+        /* Focus states untuk accessibility */
+        .kegiatan-controls .add-btn:focus,
+        .kegiatan-controls .remove-btn:focus,
+        .item-controls .item-add-btn:focus,
+        .item-controls .item-remove-btn:focus {
+            outline: 2px solid #3498db;
+            outline-offset: 2px;
+        }
+
+        /* Disabled state jika diperlukan */
+        .kegiatan-controls .add-btn:disabled,
+        .kegiatan-controls .remove-btn:disabled,
+        .item-controls .item-add-btn:disabled,
+        .item-controls .item-remove-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+
         /* Responsive Adjustments */
         @media (max-width: 768px) {
             body {
                 padding: 10px;
+                font-size: 14px;
             }
             
             .main-container {
@@ -536,22 +617,36 @@
             
             .preview-textarea {
                 min-height: 300px;
+                font-size: 13px;
             }
 
             .item-controls {
-                position: relative;
-                left: 0;
-                top: 0;
-                transform: none;
-                flex-direction: row;
-                justify-content: flex-start;
+                position: relative !important;
+                left: 0 !important;
+                top: 0 !important;
+                flex-direction: row !important;
+                justify-content: flex-start !important;
                 margin-top: 10px;
                 margin-bottom: 10px;
+                padding-left: 0 !important;
             }
 
-            .item-add-btn, .item-remove-btn {
-                width: 40px;
-                height: 40px;
+            .kegiatan-item {
+                padding-left: 15px !important;
+            }
+
+            .item-controls .item-add-btn,
+            .item-controls .item-remove-btn {
+                width: 32px !important;
+                height: 32px !important;
+                font-size: 16px !important;
+            }
+            
+            .kegiatan-controls .add-btn,
+            .kegiatan-controls .remove-btn {
+                width: 32px !important;
+                height: 32px !important;
+                font-size: 16px !important;
             }
 
             .data-siap-ops-grid {
@@ -579,6 +674,26 @@
             background-color: #f8d7da;
             color: #721c24;
             border: 1px solid #f5c6cb;
+        }
+        
+        /* Additional Buttons */
+        .additional-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        /* Import font untuk konsistensi */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        
+        /* Optional: Gunakan font Inter untuk clarity yang lebih baik */
+        body {
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .preview-textarea {
+            font-family: 'Roboto Mono', 'Consolas', 'Courier New', monospace;
         }
     </style>
 </head>
@@ -608,7 +723,7 @@
                     </div>
                     <div>
                         <label>Waktu</label>
-                        <select id="reportTime" onchange="autoGenerateReport()">
+                        <select id="reportTime" onchange="autoGenerateReport(); updatePeriodeInfo();">
                             <option value="04.00">04.00 WITA</option>
                             <option value="16.00">16.00 WITA</option>
                         </select>
@@ -696,7 +811,7 @@
                 </div>
             </div>
             
-            <!-- KEGIATAN DENGAN ROUNDED TEXT BOX -->
+            <!-- KEGIATAN DENGAN ROUNDED TEXT BOX DAN TOMBOL KOTAK -->
             <div class="input-group">
                 <label>KEGIATAN</label>
                 
@@ -706,14 +821,14 @@
                         <div class="kegiatan-header">
                             <div class="kegiatan-title">Kegiatan Danramil</div>
                             <div class="kegiatan-controls">
-                                <button type="button" class="add-btn" onclick="addKegiatanItem('danramil')">+1</button>
+                                <button type="button" class="add-btn" onclick="addKegiatanItem('danramil')" title="Tambah kegiatan Danramil">+</button>
                             </div>
                         </div>
                         <div class="kegiatan-content" id="danramil-container">
                             <div class="kegiatan-item">
                                 <div class="item-controls">
-                                    <button type="button" class="item-add-btn" onclick="addKegiatanItem('danramil')">+1</button>
-                                    <button type="button" class="item-remove-btn" onclick="removeKegiatanItem(this, 'danramil')">-</button>
+                                    <button type="button" class="item-add-btn" onclick="addKegiatanItem('danramil')" title="Tambah kegiatan Danramil">+</button>
+                                    <button type="button" class="item-remove-btn" onclick="removeKegiatanItem(this, 'danramil')" title="Hapus kegiatan ini">-</button>
                                 </div>
                                 <textarea class="kegiatan-textarea-rounded auto-resize" 
                                           placeholder="Tulis kegiatan Danramil 1..." 
@@ -723,7 +838,7 @@
                             </div>
                         </div>
                         <div class="kegiatan-instruction">
-                            Klik angka hijau untuk menambah kegiatan (laporan ke-2, ke-3, dst), "-" untuk menghapus. Input dengan spasi berlebih akan berwarna kuning.
+                            Klik tombol "+" untuk menambah kegiatan (laporan ke-2, ke-3, dst), "-" untuk menghapus. Input dengan spasi berlebih akan berwarna kuning.
                         </div>
                     </div>
                 </div>
@@ -734,14 +849,14 @@
                         <div class="kegiatan-header">
                             <div class="kegiatan-title">Kegiatan Koramil</div>
                             <div class="kegiatan-controls">
-                                <button type="button" class="add-btn" onclick="addKegiatanItem('koramil')">+1</button>
+                                <button type="button" class="add-btn" onclick="addKegiatanItem('koramil')" title="Tambah kegiatan Koramil">+</button>
                             </div>
                         </div>
                         <div class="kegiatan-content" id="koramil-container">
                             <div class="kegiatan-item">
                                 <div class="item-controls">
-                                    <button type="button" class="item-add-btn" onclick="addKegiatanItem('koramil')">+1</button>
-                                    <button type="button" class="item-remove-btn" onclick="removeKegiatanItem(this, 'koramil')">-</button>
+                                    <button type="button" class="item-add-btn" onclick="addKegiatanItem('koramil')" title="Tambah kegiatan Koramil">+</button>
+                                    <button type="button" class="item-remove-btn" onclick="removeKegiatanItem(this, 'koramil')" title="Hapus kegiatan ini">-</button>
                                 </div>
                                 <textarea class="kegiatan-textarea-rounded auto-resize" 
                                           placeholder="Tulis kegiatan Koramil 1..." 
@@ -751,7 +866,7 @@
                             </div>
                         </div>
                         <div class="kegiatan-instruction">
-                            Klik angka hijau untuk menambah kegiatan (laporan ke-2, ke-3, dst), "-" untuk menghapus. Input dengan spasi berlebih akan berwarna kuning.
+                            Klik tombol "+" untuk menambah kegiatan (laporan ke-2, ke-3, dst), "-" untuk menghapus. Input dengan spasi berlebih akan berwarna kuning.
                         </div>
                     </div>
                 </div>
@@ -762,14 +877,14 @@
                         <div class="kegiatan-header">
                             <div class="kegiatan-title">Kegiatan Babinsa</div>
                             <div class="kegiatan-controls">
-                                <button type="button" class="add-btn" onclick="addKegiatanItem('babinsa')">+1</button>
+                                <button type="button" class="add-btn" onclick="addKegiatanItem('babinsa')" title="Tambah kegiatan Babinsa">+</button>
                             </div>
                         </div>
                         <div class="kegiatan-content" id="babinsa-container">
                             <div class="kegiatan-item">
                                 <div class="item-controls">
-                                    <button type="button" class="item-add-btn" onclick="addKegiatanItem('babinsa')">+1</button>
-                                    <button type="button" class="item-remove-btn" onclick="removeKegiatanItem(this, 'babinsa')">-</button>
+                                    <button type="button" class="item-add-btn" onclick="addKegiatanItem('babinsa')" title="Tambah kegiatan Babinsa">+</button>
+                                    <button type="button" class="item-remove-btn" onclick="removeKegiatanItem(this, 'babinsa')" title="Hapus kegiatan ini">-</button>
                                 </div>
                                 <textarea class="kegiatan-textarea-rounded auto-resize" 
                                           placeholder="Tulis kegiatan Babinsa 1..." 
@@ -779,7 +894,7 @@
                             </div>
                         </div>
                         <div class="kegiatan-instruction">
-                            Klik angka hijau untuk menambah kegiatan (laporan ke-2, ke-3, dst), "-" untuk menghapus. Input dengan spasi berlebih akan berwarna kuning.
+                            Klik tombol "+" untuk menambah kegiatan (laporan ke-2, ke-3, dst), "-" untuk menghapus. Input dengan spasi berlebih akan berwarna kuning.
                         </div>
                     </div>
                 </div>
@@ -827,7 +942,7 @@ Mulai mengisi form di sebelah kiri untuk melihat preview laporan</textarea>
             </button>
             
             <!-- Tombol Tambahan -->
-            <div class="additional-buttons" style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px;">
+            <div class="additional-buttons">
                 <button onclick="exportToTxt()" style="background-color: #6c757d;">
                     📥 Export ke TXT
                 </button>
@@ -836,6 +951,9 @@ Mulai mengisi form di sebelah kiri untuk melihat preview laporan</textarea>
                 </button>
                 <button onclick="printReport()" style="background-color: #17a2b8;">
                     🖨️ Print Laporan
+                </button>
+                <button onclick="copyToClipboard()" style="background-color: #6f42c1;">
+                    📋 Copy Text
                 </button>
             </div>
         </div>
@@ -1232,7 +1350,7 @@ Mulai mengisi form di sebelah kiri untuk melihat preview laporan</textarea>
             return formattedItems.join('\n');
         }
 
-        // TAMBAH ITEM KEGIATAN DENGAN LOGIKA TOMBOL YANG BENAR
+        // TAMBAH ITEM KEGIATAN DENGAN TOMBOL KOTAK YANG BENAR
         function addKegiatanItem(type) {
             const container = document.getElementById(`${type}-container`);
             const itemCount = container.querySelectorAll('.kegiatan-item').length;
@@ -1243,18 +1361,18 @@ Mulai mengisi form di sebelah kiri untuk melihat preview laporan</textarea>
                 return;
             }
             
-            const newIndex = itemCount; // Karena kita mulai dari 0
-            const laporanKe = newIndex + 1; // Laporan ke-1, ke-2, dst
+            const newIndex = itemCount;
+            const laporanKe = newIndex + 1;
             
             const newItem = document.createElement('div');
             newItem.className = 'kegiatan-item';
             newItem.innerHTML = `
                 <div class="item-controls">
-                    <button type="button" class="item-add-btn" onclick="addKegiatanItem('${type}')">+1</button>
-                    <button type="button" class="item-remove-btn" onclick="removeKegiatanItem(this, '${type}')">-</button>
+                    <button type="button" class="item-add-btn" onclick="addKegiatanItem('${type}')" title="Tambah kegiatan ${laporanKe + 1}">+</button>
+                    <button type="button" class="item-remove-btn" onclick="removeKegiatanItem(this, '${type}')" title="Hapus kegiatan ini">-</button>
                 </div>
                 <textarea class="kegiatan-textarea-rounded auto-resize" 
-                          placeholder="Tulis ${type.charAt(0).toUpperCase() + type.slice(1)} ${laporanKe + 1}..." 
+                          placeholder="Tulis ${type.charAt(0).toUpperCase() + type.slice(1)} ${laporanKe}..." 
                           id="${type}-${newIndex}"
                           oninput="autoResize(this); checkExcessSpacesTextarea(this); autoGenerateReport()" 
                           onkeyup="checkExcessSpacesTextarea(this)"></textarea>
@@ -1265,7 +1383,7 @@ Mulai mengisi form di sebelah kiri untuk melihat preview laporan</textarea>
             const newTextarea = newItem.querySelector('textarea');
             autoResize(newTextarea);
             
-            // Update semua tombol "+" di container ini
+            // Update semua tombol di container ini
             updateAddButtons(type);
             
             // Scroll ke item baru
@@ -1273,9 +1391,12 @@ Mulai mengisi form di sebelah kiri untuk melihat preview laporan</textarea>
             
             // Auto generate report setelah menambah item
             autoGenerateReport();
+            
+            // Auto save
+            saveSessionData();
         }
 
-        // HAPUS ITEM KEGIATAN DENGAN UPDATE TOMBOL YANG BENAR
+        // HAPUS ITEM KEGIATAN DENGAN TOMBOL KOTAK YANG BENAR
         function removeKegiatanItem(button, type) {
             const container = document.getElementById(`${type}-container`);
             const items = container.querySelectorAll('.kegiatan-item');
@@ -1300,14 +1421,17 @@ Mulai mengisi form di sebelah kiri untuk melihat preview laporan</textarea>
                 }
             });
             
-            // Update semua tombol "+"
+            // Update semua tombol
             updateAddButtons(type);
             
             // Auto generate report setelah menghapus item
             autoGenerateReport();
+            
+            // Auto save
+            saveSessionData();
         }
 
-        // UPDATE TOMBOL "+" SELALU MENUNJUKKAN "+1"
+        // UPDATE TOMBOL "+" SELALU MENUNJUKKAN "+" DAN "-" SAJA
         function updateAddButtons(type) {
             const container = document.getElementById(`${type}-container`);
             const items = container.querySelectorAll('.kegiatan-item');
@@ -1323,17 +1447,27 @@ Mulai mengisi form di sebelah kiri untuk melihat preview laporan</textarea>
                 }
             });
             
-            // Update tombol di header - SELALU "+1"
+            // Update tombol di header - SELALU "+"
             if (headerBtn) {
-                headerBtn.textContent = '+1';
+                headerBtn.textContent = '+';
+                headerBtn.title = `Tambah kegiatan ${type.charAt(0).toUpperCase() + type.slice(1)}`;
             }
             
-            // Update tombol di samping setiap item - SELALU "+1"
-            items.forEach((item) => {
+            // Update tombol di samping setiap item - SELALU "+" dan "-"
+            items.forEach((item, index) => {
                 const addBtn = item.querySelector('.item-add-btn');
+                const removeBtn = item.querySelector('.item-remove-btn');
+                
                 if (addBtn) {
-                    // Tombol di samping SELALU menunjukkan "+1"
-                    addBtn.textContent = '+1';
+                    // Tombol di samping SELALU menunjukkan "+"
+                    addBtn.textContent = '+';
+                    addBtn.title = `Tambah kegiatan ${type.charAt(0).toUpperCase() + type.slice(1)} ${index + 2}`;
+                }
+                
+                if (removeBtn) {
+                    // Tombol di samping SELALU menunjukkan "-"
+                    removeBtn.textContent = '-';
+                    removeBtn.title = `Hapus kegiatan ${type.charAt(0).toUpperCase() + type.slice(1)} ${index + 1}`;
                 }
             });
         }
@@ -1827,6 +1961,24 @@ Mulai mengisi form di sebelah kiri untuk melihat preview laporan</textarea>
                 printWindow.close();
             }, 500);
         }
+        
+        // Copy teks ke clipboard
+        function copyToClipboard() {
+            const reportText = document.getElementById('output').value;
+            
+            if (!reportText || reportText.trim() === 'Mulai mengisi form di sebelah kiri untuk melihat preview laporan') {
+                alert('Silakan isi form terlebih dahulu untuk membuat laporan.');
+                return;
+            }
+            
+            navigator.clipboard.writeText(reportText)
+                .then(() => {
+                    showMessage('success', 'Teks berhasil disalin ke clipboard!');
+                })
+                .catch(err => {
+                    showMessage('error', 'Gagal menyalin teks: ' + err);
+                });
+        }
 
         // Initialize on load
         document.addEventListener('DOMContentLoaded', function() {
@@ -1856,7 +2008,7 @@ Mulai mengisi form di sebelah kiri untuk melihat preview laporan</textarea>
             // Hitung awal nilai kurang dari keterangan default
             updateKurangFromKeterangan();
             
-            // Inisialisasi semua tombol dengan angka yang benar
+            // Inisialisasi semua tombol dengan simbol yang benar
             initializeAllButtons();
             
             // Load saved data
