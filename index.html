@@ -164,10 +164,10 @@
             transition: height 0.2s ease;
         }
         
-        /* Preview Textarea (Auto-resize juga) */
+        /* Preview Textarea */
         .preview-textarea {
             width: 100%;
-            min-height: 400px;
+            min-height: 450px;
             padding: 15px;
             border: 1px solid #e1e8ed;
             font-family: 'Consolas', 'Courier New', monospace;
@@ -269,46 +269,88 @@
             transform: translateY(-1px);
         }
         
-        /* Tombol WhatsApp */
-        .whatsapp-btn {
-            background-color: #25D366;
+        /* TOMBOL HYBRID - WHATSAPP + GOOGLE SHEETS */
+        .hybrid-btn {
+            background: linear-gradient(135deg, #25D366 0%, #34A853 100%);
             color: white;
-            margin-top: 15px;
+            margin-top: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
-            font-size: 14px;
-            padding: 14px;
+            gap: 12px;
+            font-size: 15px;
+            padding: 16px;
+            font-weight: 700;
+            border: none;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.2);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
         }
         
-        .whatsapp-btn:hover {
-            background-color: #128C7E;
-            transform: translateY(-1px);
-            box-shadow: 0 4px 8px rgba(37, 211, 102, 0.2);
+        .hybrid-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(37, 211, 102, 0.3);
+            background: linear-gradient(135deg, #1DA851 0%, #2E8B57 100%);
         }
         
-        /* Tombol Google Sheets */
-        .sheets-btn {
-            background-color: #34A853;
-            color: white;
-            margin-top: 10px;
+        .hybrid-btn:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 8px rgba(37, 211, 102, 0.2);
+        }
+        
+        .hybrid-btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .hybrid-btn:hover::after {
+            left: 100%;
+        }
+        
+        .hybrid-icon {
+            font-size: 20px;
             display: flex;
             align-items: center;
-            justify-content: center;
-            gap: 10px;
-            font-size: 14px;
-            padding: 14px;
         }
         
-        .sheets-btn:hover {
-            background-color: #2E8B57;
-            transform: translateY(-1px);
-            box-shadow: 0 4px 8px rgba(52, 168, 83, 0.2);
+        .hybrid-text {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            line-height: 1.3;
         }
         
-        .whatsapp-icon, .sheets-icon {
-            font-size: 18px;
+        .hybrid-main {
+            font-weight: 700;
+        }
+        
+        .hybrid-sub {
+            font-size: 11px;
+            opacity: 0.9;
+            font-weight: 400;
+        }
+        
+        /* Loading state untuk tombol hybrid */
+        .hybrid-btn.loading {
+            opacity: 0.8;
+            cursor: wait;
+        }
+        
+        .hybrid-btn.loading .hybrid-icon {
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
         
         /* Hidden Button */
@@ -340,6 +382,17 @@
             align-items: center;
             font-size: 16px;
             color: #2c3e50;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .loading-spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #3498db;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
         }
 
         /* Auto-generate notification */
@@ -395,7 +448,7 @@
             align-items: center;
         }
 
-        /* TOMBOL DI HEADER (Untuk menambah item baru) - DIPERBAIKI */
+        /* TOMBOL DI HEADER */
         .kegiatan-controls .add-btn,
         .kegiatan-controls .remove-btn {
             width: 28px !important;
@@ -473,7 +526,7 @@
             box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.1);
         }
 
-        /* TOMBOL DI SAMPING ITEM (Inline controls) - DIPERBAIKI */
+        /* TOMBOL DI SAMPING ITEM */
         .item-controls {
             position: absolute;
             left: -40px !important;
@@ -616,7 +669,7 @@
             }
             
             .preview-textarea {
-                min-height: 300px;
+                min-height: 350px;
                 font-size: 13px;
             }
 
@@ -653,6 +706,15 @@
                 grid-template-columns: 1fr;
                 gap: 5px;
             }
+            
+            .hybrid-btn {
+                padding: 14px;
+                font-size: 14px;
+            }
+            
+            .hybrid-text {
+                align-items: center;
+            }
         }
 
         /* Success/Error Messages */
@@ -662,6 +724,7 @@
             margin-top: 10px;
             font-size: 13px;
             display: none;
+            text-align: center;
         }
 
         .success {
@@ -674,14 +737,6 @@
             background-color: #f8d7da;
             color: #721c24;
             border: 1px solid #f5c6cb;
-        }
-        
-        /* Additional Buttons */
-        .additional-buttons {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            margin-top: 10px;
         }
         
         /* Import font untuk konsistensi */
@@ -699,7 +754,10 @@
 </head>
 <body>
     <!-- Loading -->
-    <div id="loading" class="loading">Memproses...</div>
+    <div id="loading" class="loading">
+        <div class="loading-spinner"></div>
+        <div>Memproses laporan...</div>
+    </div>
     
     <!-- Header -->
     <div class="header">
@@ -762,7 +820,7 @@
                 </div>
             </div>
             
-            <!-- DATA SIAP OPS (MODIFIED) -->
+            <!-- DATA SIAP OPS -->
             <div class="input-group">
                 <label>DATA SIAP OPS</label>
                 <div class="data-siap-ops-grid">
@@ -794,7 +852,7 @@
                 </div>
             </div>
             
-            <!-- KETERANGAN (MODIFIED) -->
+            <!-- KETERANGAN -->
             <div class="input-group">
                 <label>KETERANGAN</label>
                 <textarea class="auto-resize" id="keterangan" placeholder="Ketik keterangan (tekan Enter untuk baris baru, otomatis tambah '-')" onkeydown="handleKeteranganKeydown(event)" oninput="updateKurangFromKeterangan(); autoGenerateReport()">-DD : 0
@@ -811,7 +869,7 @@
                 </div>
             </div>
             
-            <!-- KEGIATAN DENGAN ROUNDED TEXT BOX DAN TOMBOL KOTAK -->
+            <!-- KEGIATAN DENGAN ROUNDED TEXT BOX -->
             <div class="input-group">
                 <label>KEGIATAN</label>
                 
@@ -838,7 +896,7 @@
                             </div>
                         </div>
                         <div class="kegiatan-instruction">
-                            Klik tombol "+" untuk menambah kegiatan (laporan ke-2, ke-3, dst), "-" untuk menghapus. Input dengan spasi berlebih akan berwarna kuning.
+                            Klik tombol "+" untuk menambah kegiatan (laporan ke-2, ke-3, dst), "-" untuk menghapus.
                         </div>
                     </div>
                 </div>
@@ -866,7 +924,7 @@
                             </div>
                         </div>
                         <div class="kegiatan-instruction">
-                            Klik tombol "+" untuk menambah kegiatan (laporan ke-2, ke-3, dst), "-" untuk menghapus. Input dengan spasi berlebih akan berwarna kuning.
+                            Klik tombol "+" untuk menambah kegiatan (laporan ke-2, ke-3, dst), "-" untuk menghapus.
                         </div>
                     </div>
                 </div>
@@ -894,7 +952,7 @@
                             </div>
                         </div>
                         <div class="kegiatan-instruction">
-                            Klik tombol "+" untuk menambah kegiatan (laporan ke-2, ke-3, dst), "-" untuk menghapus. Input dengan spasi berlebih akan berwarna kuning.
+                            Klik tombol "+" untuk menambah kegiatan (laporan ke-2, ke-3, dst), "-" untuk menghapus.
                         </div>
                     </div>
                 </div>
@@ -929,33 +987,19 @@ Mulai mengisi form di sebelah kiri untuk melihat preview laporan</textarea>
                 ✗ Terjadi kesalahan. Silakan coba lagi.
             </div>
             
-            <!-- Tombol Kirim ke WhatsApp -->
-            <button class="whatsapp-btn" onclick="sendToWhatsApp()">
-                <span class="whatsapp-icon">📱</span>
-                KIRIM KE WHATSAPP
+            <!-- TOMBOL HYBRID - SATU KLIK DUA AKSI -->
+            <button class="hybrid-btn" onclick="sendAndSaveReport()" id="hybridButton">
+                <span class="hybrid-icon">📱📊</span>
+                <div class="hybrid-text">
+                    <span class="hybrid-main">KIRIM & SIMPAN LAPORAN</span>
+                    <span class="hybrid-sub">WhatsApp + Google Sheets</span>
+                </div>
             </button>
             
-            <!-- Tombol Kirim ke Google Sheets -->
-            <button class="sheets-btn" onclick="saveToGoogleSheets()">
-                <span class="sheets-icon">📊</span>
-                SIMPAN KE GOOGLE SHEETS
+            <!-- Hanya menyisakan tombol Export ke TXT -->
+            <button onclick="exportToTxt()" style="margin-top: 10px; background-color: #6c757d; padding: 12px;">
+                📥 Export ke TXT
             </button>
-            
-            <!-- Tombol Tambahan -->
-            <div class="additional-buttons">
-                <button onclick="exportToTxt()" style="background-color: #6c757d;">
-                    📥 Export ke TXT
-                </button>
-                <button onclick="resetForm()" style="background-color: #dc3545;">
-                    🔄 Reset Form
-                </button>
-                <button onclick="printReport()" style="background-color: #17a2b8;">
-                    🖨️ Print Laporan
-                </button>
-                <button onclick="copyToClipboard()" style="background-color: #6f42c1;">
-                    📋 Copy Text
-                </button>
-            </div>
         </div>
     </div>
     
@@ -966,16 +1010,98 @@ Mulai mengisi form di sebelah kiri untuk melihat preview laporan</textarea>
     </div>
 
     <script>
-        // Data untuk konversi bulan dan hari
+        // ==============================================
+        // KONFIGURASI DAN DATA
+        // ==============================================
+        
         const months = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 
                         'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
-
         const days = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+        const scriptUrl = 'https://script.google.com/macros/s/AKfycbw-Q_BoXGfqH9cFw1djKf1DLnoMBxxyI8efOlgOJyDtiKc1rnpiYOAR8UpaXsFA1P7Irg/exec';
 
-        // ID Spreadsheet dan Folder
-        const SPREADSHEET_ID = '1rBeGgIo0ELSyHtqXOoS9jl9hhjxobXuDqWumxjIMh4k';
-        const FOLDER_ID = '1iPXRfXJKNieQjOaiSw5oc2LuoLWwmR6T';
+        // ==============================================
+        // FUNGSI UTAMA BARU: SEND AND SAVE REPORT
+        // ==============================================
+        
+        async function sendAndSaveReport() {
+            try {
+                // Validasi form
+                if (!validateForm()) return;
+                
+                // Tampilkan loading
+                showLoading(true);
+                const hybridBtn = document.getElementById('hybridButton');
+                hybridBtn.classList.add('loading');
+                hybridBtn.disabled = true;
+                
+                // Step 1: Save to Google Sheets
+                const saveResult = await saveToGoogleSheets();
+                
+                if (!saveResult.success) {
+                    throw new Error(saveResult.message || 'Gagal menyimpan ke Google Sheets');
+                }
+                
+                // Step 2: Send to WhatsApp
+                setTimeout(() => {
+                    sendToWhatsApp();
+                }, 1000);
+                
+                // Step 3: Show success message
+                showMessage('success', '✅ Laporan berhasil disimpan ke Google Sheets dan dibuka untuk WhatsApp!');
+                
+                // Step 4: Reset button state setelah delay
+                setTimeout(() => {
+                    hybridBtn.classList.remove('loading');
+                    hybridBtn.disabled = false;
+                    showLoading(false);
+                }, 2000);
+                
+            } catch (error) {
+                console.error('Error in sendAndSaveReport:', error);
+                showMessage('error', '❌ Gagal: ' + error.message);
+                showLoading(false);
+                
+                const hybridBtn = document.getElementById('hybridButton');
+                hybridBtn.classList.remove('loading');
+                hybridBtn.disabled = false;
+            }
+        }
 
+        // ==============================================
+        // VALIDASI FORM
+        // ==============================================
+        
+        function validateForm() {
+            // Validasi tanggal
+            const reportDate = document.getElementById('reportDate').value;
+            if (!reportDate) {
+                showMessage('error', '❌ Silakan pilih tanggal laporan terlebih dahulu.');
+                return false;
+            }
+            
+            // Validasi laporan
+            const reportText = document.getElementById('output').value;
+            if (!reportText || reportText.trim() === 'Mulai mengisi form di sebelah kiri untuk melihat preview laporan') {
+                showMessage('error', '❌ Silakan isi form terlebih dahulu untuk membuat laporan.');
+                return false;
+            }
+            
+            // Validasi apakah laporan sudah lengkap
+            const isEmptyReport = reportText.trim() === 'Klik GENERATE untuk membuat laporan' || 
+                                reportText.trim().length < 100;
+            
+            if (isEmptyReport) {
+                showMessage('error', '❌ Laporan belum lengkap. Pastikan semua data sudah terisi.');
+                return false;
+            }
+            
+            return true;
+        }
+
+        // ==============================================
+        // FUNGSI YANG SUDAH ADA (DIPERTAHANKAN)
+        // ==============================================
+        
         // Format tanggal ke Indonesia
         function formatDateIndonesia(date) {
             const day = days[date.getDay()];
@@ -1002,15 +1128,10 @@ Mulai mengisi form di sebelah kiri untuk melihat preview laporan</textarea>
         function initAutoResize() {
             const textareas = document.querySelectorAll('.auto-resize, .preview-textarea');
             textareas.forEach(textarea => {
-                // Set initial height
                 autoResize(textarea);
-                
-                // Add event listener
                 textarea.addEventListener('input', function() {
                     autoResize(this);
                 });
-                
-                // Also resize on window resize
                 window.addEventListener('resize', function() {
                     autoResize(textarea);
                 });
@@ -1081,10 +1202,7 @@ Mulai mengisi form di sebelah kiri untuk melihat preview laporan</textarea>
         // Auto generate report saat input berubah
         let autoGenerateTimeout;
         function autoGenerateReport() {
-            // Clear previous timeout
             clearTimeout(autoGenerateTimeout);
-            
-            // Set new timeout for debouncing (300ms delay)
             autoGenerateTimeout = setTimeout(() => {
                 generateReport();
             }, 300);
@@ -1097,11 +1215,9 @@ Mulai mengisi form di sebelah kiri untuk melihat preview laporan</textarea>
             const lines = text.split('\n').filter(line => line.trim());
             if (lines.length === 0) return '';
             
-            // Cek apakah ada pattern : dalam text
             const hasColonPattern = lines.some(line => line.includes(':'));
             if (!hasColonPattern) return text;
             
-            // Pisahkan lines menjadi groups berdasarkan pattern
             const groups = [];
             let currentGroup = [];
             
@@ -1122,17 +1238,14 @@ Mulai mengisi form di sebelah kiri untuk melihat preview laporan</textarea>
                 groups.push([...currentGroup]);
             }
             
-            // Format setiap group yang memiliki :
             const formattedGroups = groups.map(group => {
                 if (group.length === 1 && !group[0].includes(':')) {
                     return group[0];
                 }
                 
-                // Untuk group yang memiliki :
                 const formattedLines = [];
                 const maxLengths = [];
                 
-                // Hitung max length untuk setiap kolom
                 group.forEach(line => {
                     const parts = line.split(':');
                     parts.forEach((part, index) => {
@@ -1146,22 +1259,18 @@ Mulai mengisi form di sebelah kiri untuk melihat preview laporan</textarea>
                     });
                 });
                 
-                // Format setiap line dalam group
                 group.forEach(line => {
                     const parts = line.split(':');
                     const formattedParts = parts.map((part, index) => {
                         const trimmedPart = part.trim();
                         if (index === parts.length - 1) {
-                            // Bagian terakhir (setelah titik dua terakhir)
                             return trimmedPart;
                         } else {
-                            // Bagian sebelum titik dua
                             const padding = maxLengths[index] - trimmedPart.length;
                             return trimmedPart + ' '.repeat(Math.max(0, padding));
                         }
                     });
                     
-                    // Gabungkan dengan tepat satu spasi sebelum dan sesudah titik dua
                     let formattedLine = '';
                     for (let i = 0; i < formattedParts.length; i++) {
                         if (i < formattedParts.length - 1) {
@@ -1179,7 +1288,7 @@ Mulai mengisi form di sebelah kiri untuk melihat preview laporan</textarea>
             return formattedGroups.join('\n');
         }
 
-        // Normalisasi spasi (hanya satu spasi antara kata)
+        // Normalisasi spasi
         function normalizeSpaces(text) {
             return text.replace(/\s+/g, ' ').trim();
         }
@@ -1224,13 +1333,10 @@ Mulai mengisi form di sebelah kiri untuk melihat preview laporan</textarea>
                 const end = textarea.selectionEnd;
                 const text = textarea.value;
                 
-                // Dapatkan baris saat ini
                 const beforeCursor = text.substring(0, start);
                 const lines = beforeCursor.split('\n');
                 const currentLine = lines[lines.length - 1];
                 
-                // Jika baris saat ini sudah ada "-", tambah "-" di baris baru
-                // Jika tidak, tambah "-" di baris baru
                 let newText;
                 if (currentLine.trim().startsWith('-')) {
                     newText = text.substring(0, start) + '\n-' + text.substring(end);
@@ -1239,16 +1345,11 @@ Mulai mengisi form di sebelah kiri untuk melihat preview laporan</textarea>
                 }
                 
                 textarea.value = newText;
-                
-                // Posisikan kursor setelah "-"
-                const newPosition = start + 2; // +1 untuk newline, +1 untuk "-"
+                const newPosition = start + 2;
                 textarea.selectionStart = textarea.selectionEnd = newPosition;
                 
-                // Trigger input event untuk update auto-resize dan hitung kurang
                 const inputEvent = new Event('input');
                 textarea.dispatchEvent(inputEvent);
-                
-                // Auto generate report
                 autoGenerateReport();
                 
                 return false;
@@ -1274,14 +1375,11 @@ Mulai mengisi form di sebelah kiri untuk melihat preview laporan</textarea>
                 }
             });
             
-            // Update nilai "Kurang" di DATA SIAP OPS
             document.getElementById('kurang').value = totalKurang;
-            
-            // Hitung ulang "Siap Ops"
             calculateSiapOps();
         }
 
-        // Calculate Siap Ops (diubah untuk menggunakan nilai tetap)
+        // Calculate Siap Ops
         function calculateSiapOps() {
             const nyata = parseInt(document.getElementById('nyata').value) || 0;
             const kurang = parseInt(document.getElementById('kurang').value) || 0;
@@ -1289,23 +1387,20 @@ Mulai mengisi form di sebelah kiri untuk melihat preview laporan</textarea>
             document.getElementById('siapOps').value = siapOps > 0 ? siapOps : 0;
         }
 
-        // Format keterangan dengan format yang benar (PERBAIKAN)
+        // Format keterangan
         function formatKeterangan(text) {
             if (!text) return '-DD : 0\n-BP : 0\n-Sakit : 0\n-Ijin : 0\n-Cuti : 0\n-Dinas Luar : 0';
             
             const lines = text.split('\n').filter(line => line.trim());
             if (lines.length === 0) return '-DD : 0\n-BP : 0\n-Sakit : 0\n-Ijin : 0\n-Cuti : 0\n-Dinas Luar : 0';
             
-            // Normalisasi setiap baris
             const normalizedLines = lines.map(line => {
                 let trimmedLine = line.trim();
                 
-                // Pastikan dimulai dengan "-"
                 if (!trimmedLine.startsWith('-')) {
                     trimmedLine = '-' + trimmedLine;
                 }
                 
-                // Pastikan ada " : " antara item dan nilai
                 if (trimmedLine.includes(':')) {
                     const parts = trimmedLine.split(':');
                     if (parts.length >= 2) {
@@ -1321,7 +1416,7 @@ Mulai mengisi form di sebelah kiri untuk melihat preview laporan</textarea>
             return normalizedLines.join('\n');
         }
 
-        // Format kegiatan items TANPA angka 2), 3), dst
+        // Format kegiatan items
         function formatKegiatanItemsRounded(containerId) {
             const container = document.getElementById(containerId);
             const textareas = container.querySelectorAll('.kegiatan-textarea-rounded');
@@ -1336,26 +1431,20 @@ Mulai mengisi form di sebelah kiri untuk melihat preview laporan</textarea>
             
             if (items.length === 0) return '';
             
-            // Format semua item dengan "-" di awal (TANPA angka 2), 3), dst)
             const formattedItems = items.map((item, index) => {
                 const trimmed = item.trim();
-                
-                // Bersihkan awalan "-" jika ada
                 const cleanItem = trimmed.startsWith('-') ? trimmed.substring(1).trim() : trimmed;
-                
-                // Selalu format dengan "-" di awal, tanpa angka
                 return `-${cleanItem}`;
             });
             
             return formattedItems.join('\n');
         }
 
-        // TAMBAH ITEM KEGIATAN DENGAN TOMBOL KOTAK YANG BENAR
+        // TAMBAH ITEM KEGIATAN
         function addKegiatanItem(type) {
             const container = document.getElementById(`${type}-container`);
             const itemCount = container.querySelectorAll('.kegiatan-item').length;
             
-            // Batasi maksimal 5 laporan per kategori
             if (itemCount >= 5) {
                 alert(`Maksimal 5 laporan per kategori.`);
                 return;
@@ -1379,29 +1468,19 @@ Mulai mengisi form di sebelah kiri untuk melihat preview laporan</textarea>
             `;
             container.appendChild(newItem);
             
-            // Initialize auto-resize untuk textarea baru
             const newTextarea = newItem.querySelector('textarea');
             autoResize(newTextarea);
-            
-            // Update semua tombol di container ini
             updateAddButtons(type);
-            
-            // Scroll ke item baru
             newItem.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-            
-            // Auto generate report setelah menambah item
             autoGenerateReport();
-            
-            // Auto save
             saveSessionData();
         }
 
-        // HAPUS ITEM KEGIATAN DENGAN TOMBOL KOTAK YANG BENAR
+        // HAPUS ITEM KEGIATAN
         function removeKegiatanItem(button, type) {
             const container = document.getElementById(`${type}-container`);
             const items = container.querySelectorAll('.kegiatan-item');
             
-            // Jangan hapus jika hanya tersisa satu item
             if (items.length <= 1) {
                 alert(`Minimal harus ada satu laporan untuk ${type}.`);
                 return;
@@ -1410,10 +1489,8 @@ Mulai mengisi form di sebelah kiri untuk melihat preview laporan</textarea>
             const item = button.closest('.kegiatan-item');
             item.remove();
             
-            // Re-index semua item yang tersisa
             const remainingItems = container.querySelectorAll('.kegiatan-item');
             remainingItems.forEach((item, index) => {
-                // Update ID textarea
                 const textarea = item.querySelector('textarea');
                 if (textarea) {
                     textarea.id = `${type}-${index}`;
@@ -1421,22 +1498,16 @@ Mulai mengisi form di sebelah kiri untuk melihat preview laporan</textarea>
                 }
             });
             
-            // Update semua tombol
             updateAddButtons(type);
-            
-            // Auto generate report setelah menghapus item
             autoGenerateReport();
-            
-            // Auto save
             saveSessionData();
         }
 
-        // UPDATE TOMBOL "+" SELALU MENUNJUKKAN "+" DAN "-" SAJA
+        // UPDATE TOMBOL "+" DAN "-"
         function updateAddButtons(type) {
             const container = document.getElementById(`${type}-container`);
             const items = container.querySelectorAll('.kegiatan-item');
             
-            // Cari tombol header untuk kategori ini
             const kegiatanBoxes = document.querySelectorAll('.kegiatan-box');
             let headerBtn = null;
             
@@ -1447,39 +1518,34 @@ Mulai mengisi form di sebelah kiri untuk melihat preview laporan</textarea>
                 }
             });
             
-            // Update tombol di header - SELALU "+"
             if (headerBtn) {
                 headerBtn.textContent = '+';
                 headerBtn.title = `Tambah kegiatan ${type.charAt(0).toUpperCase() + type.slice(1)}`;
             }
             
-            // Update tombol di samping setiap item - SELALU "+" dan "-"
             items.forEach((item, index) => {
                 const addBtn = item.querySelector('.item-add-btn');
                 const removeBtn = item.querySelector('.item-remove-btn');
                 
                 if (addBtn) {
-                    // Tombol di samping SELALU menunjukkan "+"
                     addBtn.textContent = '+';
                     addBtn.title = `Tambah kegiatan ${type.charAt(0).toUpperCase() + type.slice(1)} ${index + 2}`;
                 }
                 
                 if (removeBtn) {
-                    // Tombol di samping SELALU menunjukkan "-"
                     removeBtn.textContent = '-';
                     removeBtn.title = `Hapus kegiatan ${type.charAt(0).toUpperCase() + type.slice(1)} ${index + 1}`;
                 }
             });
         }
 
-        // Format haljol (normalize spaces dan format alignment)
+        // Format haljol
         function formatHaljol(text) {
             return formatAlignedList(normalizeSpaces(text));
         }
 
-        // Generate Report - DIPERBAIKI untuk format yang benar
+        // Generate Report
         function generateReport() {
-            // Get form values
             const reportDate = new Date(document.getElementById('reportDate').value);
             const reportTime = document.getElementById('reportTime').value;
             
@@ -1492,33 +1558,27 @@ Mulai mengisi form di sebelah kiri untuk melihat preview laporan</textarea>
             
             const keterangan = formatKeterangan(document.getElementById('keterangan').value);
             
-            // Get kegiatan dari rounded textbox dengan format yang benar
             const danramil = formatKegiatanItemsRounded('danramil-container');
             const koramil = formatKegiatanItemsRounded('koramil-container');
             const babinsa = formatKegiatanItemsRounded('babinsa-container');
             
-            // Format date
             const dateInfo = formatDateIndonesia(reportDate);
-            
-            // Get situasi text
             const situasiText = document.getElementById('situasiPreview').textContent;
             
-            // Determine greeting
             let waktuSalam = 'Pagi';
             if (reportTime === '16.00') waktuSalam = 'Sore';
             
-            // Build report dengan format yang benar
             let report = `Perihal : Laporan perkembangan situasi Koramil 1609-05/Sukasada Hari ${dateInfo.hari} Tanggal, ${dateInfo.tanggal} ${dateInfo.bulan} ${dateInfo.tahun}.\n\n`;
             report += `Yth. Komandan Kodim 1609/Buleleng.\n`;
             report += `Cc. Kasdim 1609/Buleleng.\n\n`;
             
             report += `Selamat ${waktuSalam}, Mohon ijin melaporkan Situasi Satuan Koramil 1609-05/Sukasada Hari ${dateInfo.hari} Tanggal, ${dateInfo.tanggal} ${dateInfo.bulan} ${dateInfo.tahun} Pukul ${reportTime} Wita dalam rangka kegiatan Pembinaan Kekuatan Satuan Bulan ${dateInfo.bulan} tahun ${dateInfo.tahun} sebagai berikut :\n\n`;
             
-            report += `*I. Situasi dan Haljol :*\n\n`;
+            report += `**I. Situasi dan Haljol :**\n\n`;
             report += `${situasiText}\n\n`;
             report += `-Haljol : ${haljol}.\n\n`;
             
-            report += `*II. Data Siap Ops :*\n\n`;
+            report += `**II. Data Siap Ops :**\n\n`;
             report += `1. Top DSPP : ${topDspp}\n`;
             report += `2. Nyata : ${nyata}\n`;
             report += `3. Kurang : ${kurang}\n`;
@@ -1532,16 +1592,17 @@ Mulai mengisi form di sebelah kiri untuk melihat preview laporan</textarea>
                 }
             });
             
-            report += `\n*III. Kegiatan :*\n\n`;
-            report += `*1. Kegiatan Danramil :*\n\n`;
+            report += `\n**III. Kegiatan :**\n\n`;
+            report += `**1. Kegiatan Danramil :**\n\n`;
             
             if (danramil) {
                 report += `${danramil}\n\n`;
             } else {
                 report += `-Melaksanakan monitoring perkembangan situasi dan kondisi wilayah Kecamatan Sukasada Kabupaten Buleleng.\n`;
+                report += `-Memimpin kegiatan rutin satuan Koramil 1609-05/Sukasada.\n\n`;
             }
             
-            report += `*2. Kegiatan Koramil :*\n\n`;
+            report += `**2. Kegiatan Koramil :**\n\n`;
             if (koramil) {
                 report += `${koramil}\n\n`;
             } else {
@@ -1550,25 +1611,21 @@ Mulai mengisi form di sebelah kiri untuk melihat preview laporan</textarea>
             
             report += `-Para Babinsa monitoring terkait perkembangan situasi dan kondisi di wilayah Desa binaan masing-masing.\n\n`;
             
-            report += `*3. Kegiatan Babinsa :*\n\n`;
+            report += `**3. Kegiatan Babinsa :**\n\n`;
             if (babinsa) {
                 report += `${babinsa}\n\n`;
             } else {
                 report += `-Melaksanakan pemantauan dan pendataan situasi wilayah desa binaan masing-masing.\n`;
+                report += `-Melaksanakan koordinasi dengan perangkat desa setempat.\n\n`;
             }
             
-            report += `*DEMIKIAN MMP.*\n`;
+            report += `*DEMIKIAN MMP.*\n\n`;
             report += `Dokumentasi terlampir.`;
             
-            // Display report
             const outputElement = document.getElementById('output');
             outputElement.value = report;
-            
-            // Preview selalu editable
             outputElement.readOnly = false;
             outputElement.style.backgroundColor = '#fafafa';
-            
-            // Resize textarea
             autoResize(outputElement);
         }
 
@@ -1582,36 +1639,24 @@ Mulai mengisi form di sebelah kiri untuk melihat preview laporan</textarea>
                 return;
             }
             
-            // Encode text for WhatsApp URL
             const encodedText = encodeURIComponent(reportText);
-            
-            // Create WhatsApp URL
             const whatsappUrl = `https://wa.me/?text=${encodedText}`;
-            
-            // Open WhatsApp in new tab
             window.open(whatsappUrl, '_blank');
         }
 
         // Kirim data ke Google Sheets
         async function saveToGoogleSheets() {
-            // Validasi form
-            const reportDate = document.getElementById('reportDate').value;
-            if (!reportDate) {
-                alert('Silakan pilih tanggal laporan terlebih dahulu.');
-                return;
-            }
-            
-            const reportText = document.getElementById('output').value;
-            if (!reportText || reportText.trim() === 'Mulai mengisi form di sebelah kiri untuk melihat preview laporan') {
-                alert('Silakan isi form terlebih dahulu untuk membuat laporan.');
-                return;
-            }
-            
-            // Tampilkan loading
-            showLoading(true);
-            
             try {
-                // Kumpulkan semua data
+                const reportDate = document.getElementById('reportDate').value;
+                if (!reportDate) {
+                    return { success: false, message: 'Silakan pilih tanggal laporan' };
+                }
+                
+                const reportText = document.getElementById('output').value;
+                if (!reportText || reportText.trim() === 'Mulai mengisi form di sebelah kiri untuk melihat preview laporan') {
+                    return { success: false, message: 'Silakan isi form terlebih dahulu' };
+                }
+                
                 const formData = {
                     timestamp: new Date().toISOString(),
                     reportDate: reportDate,
@@ -1630,19 +1675,16 @@ Mulai mengisi form di sebelah kiri untuk melihat preview laporan</textarea>
                     createdBy: 'Koramil 1609-05/Sukasada System'
                 };
                 
-                // Kirim data ke Google Sheets menggunakan Google Apps Script
                 const response = await sendToGoogleAppsScript(formData);
                 
                 if (response.success) {
-                    showMessage('success', 'Data berhasil disimpan ke Google Sheets!');
+                    return { success: true, message: 'Data berhasil disimpan' };
                 } else {
                     throw new Error(response.error || 'Gagal menyimpan data');
                 }
             } catch (error) {
                 console.error('Error saving to Google Sheets:', error);
-                showMessage('error', `Gagal menyimpan data: ${error.message}`);
-            } finally {
-                showLoading(false);
+                return { success: false, message: error.message };
             }
         }
 
@@ -1663,9 +1705,6 @@ Mulai mengisi form di sebelah kiri untuk melihat preview laporan</textarea>
 
         // Fungsi untuk mengirim data ke Google Apps Script
         async function sendToGoogleAppsScript(data) {
-            // URL Google Apps Script Web App yang benar
-            const scriptUrl = 'https://script.google.com/macros/s/AKfycbzc4DEhShV2pXsyS1R9g0oXkhUKKYE0gmzuXNb4ZR_jMHFjJYkAtsXcV2HR82rfQw28dw/exec';
-            
             try {
                 const response = await fetch(scriptUrl, {
                     method: 'POST',
@@ -1676,12 +1715,9 @@ Mulai mengisi form di sebelah kiri untuk melihat preview laporan</textarea>
                     body: JSON.stringify(data)
                 });
                 
-                // Karena no-cors, kita tidak bisa membaca response
-                // Tapi kita anggap berhasil jika tidak ada error
                 return { success: true };
                 
             } catch (error) {
-                // Fallback: Simpan data ke localStorage sebagai backup
                 saveToLocalStorage(data);
                 return { success: true, note: 'Disimpan lokal (offline mode)' };
             }
@@ -1719,7 +1755,6 @@ Mulai mengisi form di sebelah kiri untuk melihat preview laporan</textarea>
                 successElement.style.display = 'block';
                 errorElement.style.display = 'none';
                 
-                // Sembunyikan setelah 5 detik
                 setTimeout(() => {
                     successElement.style.display = 'none';
                 }, 5000);
@@ -1728,7 +1763,6 @@ Mulai mengisi form di sebelah kiri untuk melihat preview laporan</textarea>
                 errorElement.style.display = 'block';
                 successElement.style.display = 'none';
                 
-                // Sembunyikan setelah 5 detik
                 setTimeout(() => {
                     errorElement.style.display = 'none';
                 }, 5000);
@@ -1770,7 +1804,6 @@ Mulai mengisi form di sebelah kiri untuk melihat preview laporan</textarea>
                     if (data.haljol) document.getElementById('haljol').value = data.haljol;
                     if (data.keterangan) document.getElementById('keterangan').value = data.keterangan;
                     
-                    // Load kegiatan data
                     if (data.kegiatanDanramil && data.kegiatanDanramil.length > 0) {
                         loadKegiatanData('danramil', data.kegiatanDanramil);
                     }
@@ -1781,7 +1814,6 @@ Mulai mengisi form di sebelah kiri untuk melihat preview laporan</textarea>
                         loadKegiatanData('babinsa', data.kegiatanBabinsa);
                     }
                     
-                    // Trigger update
                     updateKurangFromKeterangan();
                     autoGenerateReport();
                 } catch (error) {
@@ -1807,20 +1839,17 @@ Mulai mengisi form di sebelah kiri untuk melihat preview laporan</textarea>
         function loadKegiatanData(type, activities) {
             const container = document.getElementById(`${type}-container`);
             
-            // Clear existing items except first one
             const existingItems = container.querySelectorAll('.kegiatan-item');
             for (let i = 1; i < existingItems.length; i++) {
                 existingItems[i].remove();
             }
             
-            // Fill first item
             const firstTextarea = container.querySelector('.kegiatan-textarea-rounded');
             if (firstTextarea && activities.length > 0) {
                 firstTextarea.value = activities[0];
                 autoResize(firstTextarea);
             }
             
-            // Add additional items
             for (let i = 1; i < activities.length; i++) {
                 addKegiatanItem(type);
                 const newTextarea = container.querySelector(`#${type}-${i}`);
@@ -1845,8 +1874,7 @@ Mulai mengisi form di sebelah kiri untuk melihat preview laporan</textarea>
                 }
             });
             
-            // Setup interval untuk auto-save
-            setInterval(saveSessionData, 30000); // Save setiap 30 detik
+            setInterval(saveSessionData, 30000);
         }
 
         // Export laporan ke file txt
@@ -1871,111 +1899,8 @@ Mulai mengisi form di sebelah kiri untuk melihat preview laporan</textarea>
             a.click();
             document.body.removeChild(a);
             URL.revokeObjectURL(url);
-        }
-
-        // Reset form
-        function resetForm() {
-            if (confirm('Apakah Anda yakin ingin mereset form? Semua data yang belum disimpan akan hilang.')) {
-                // Reset tanggal ke hari ini
-                const today = new Date();
-                document.getElementById('reportDate').value = today.toISOString().split('T')[0];
-                document.getElementById('reportTime').value = '04.00';
-                document.getElementById('haljol').value = 'Nihil';
-                document.getElementById('keterangan').value = '-DD : 0\n-BP : 0\n-Sakit : 0\n-Ijin : 0\n-Cuti : 0\n-Dinas Luar : 0';
-                
-                // Reset kegiatan
-                const types = ['danramil', 'koramil', 'babinsa'];
-                types.forEach(type => {
-                    const container = document.getElementById(`${type}-container`);
-                    const items = container.querySelectorAll('.kegiatan-item');
-                    
-                    // Remove all but first item
-                    for (let i = 1; i < items.length; i++) {
-                        items[i].remove();
-                    }
-                    
-                    // Reset first item
-                    const firstTextarea = container.querySelector('.kegiatan-textarea-rounded');
-                    if (firstTextarea) {
-                        if (type === 'koramil') {
-                            firstTextarea.value = '2 orang anggota melaksanakan dinas dalam, jaga pangkalan Koramil 1609-05/Sukasada.';
-                        } else {
-                            firstTextarea.value = '';
-                        }
-                        autoResize(firstTextarea);
-                    }
-                });
-                
-                // Reset calculations
-                updateKurangFromKeterangan();
-                
-                // Clear session storage
-                sessionStorage.removeItem('koramil_form_data');
-                
-                // Generate report
-                autoGenerateReport();
-                
-                alert('Form telah direset ke kondisi awal.');
-            }
-        }
-
-        // Print laporan
-        function printReport() {
-            const reportText = document.getElementById('output').value;
             
-            if (!reportText || reportText.trim() === 'Mulai mengisi form di sebelah kiri untuk melihat preview laporan') {
-                alert('Silakan isi form terlebih dahulu untuk membuat laporan.');
-                return;
-            }
-            
-            const printWindow = window.open('', '_blank');
-            printWindow.document.write(`
-                <html>
-                <head>
-                    <title>Laporan Koramil 1609-05/Sukasada</title>
-                    <style>
-                        body {
-                            font-family: 'Courier New', monospace;
-                            font-size: 12px;
-                            line-height: 1.5;
-                            margin: 20px;
-                            white-space: pre-wrap;
-                        }
-                        @media print {
-                            body { margin: 0; }
-                        }
-                    </style>
-                </head>
-                <body>
-                    ${reportText.replace(/\n/g, '<br>')}
-                </body>
-                </html>
-            `);
-            printWindow.document.close();
-            printWindow.focus();
-            
-            setTimeout(() => {
-                printWindow.print();
-                printWindow.close();
-            }, 500);
-        }
-        
-        // Copy teks ke clipboard
-        function copyToClipboard() {
-            const reportText = document.getElementById('output').value;
-            
-            if (!reportText || reportText.trim() === 'Mulai mengisi form di sebelah kiri untuk melihat preview laporan') {
-                alert('Silakan isi form terlebih dahulu untuk membuat laporan.');
-                return;
-            }
-            
-            navigator.clipboard.writeText(reportText)
-                .then(() => {
-                    showMessage('success', 'Teks berhasil disalin ke clipboard!');
-                })
-                .catch(err => {
-                    showMessage('error', 'Gagal menyalin teks: ' + err);
-                });
+            showMessage('success', '✅ Laporan berhasil diexport ke file TXT!');
         }
 
         // Initialize on load
@@ -1987,48 +1912,31 @@ Mulai mengisi form di sebelah kiri untuk melihat preview laporan</textarea>
             calculateSiapOps();
             updatePeriodeInfo();
             
-            // Initialize auto-resize
             initAutoResize();
-            
-            // Set preview textarea to always editable
             document.getElementById('output').readOnly = false;
             
-            // Initialize auto-resize untuk textarea kegiatan yang sudah ada
             const kegiatanTextareas = document.querySelectorAll('.kegiatan-textarea-rounded');
             kegiatanTextareas.forEach(textarea => {
                 autoResize(textarea);
                 textarea.addEventListener('input', function() {
                     autoResize(this);
-                    saveSessionData(); // Auto-save
+                    saveSessionData();
                 });
             });
             
-            // Hitung awal nilai kurang dari keterangan default
             updateKurangFromKeterangan();
-            
-            // Inisialisasi semua tombol dengan simbol yang benar
             initializeAllButtons();
-            
-            // Load saved data
             loadSessionData();
-            
-            // Setup auto-save
             setupAutoSave();
-            
-            // Generate initial report
             autoGenerateReport();
             
-            // Apply initial check untuk spasi berlebih
             setTimeout(() => {
                 checkExcessSpaces('haljol');
-                
-                // Apply initial check untuk kegiatan
                 kegiatanTextareas.forEach(textarea => {
                     checkExcessSpacesTextarea(textarea);
                 });
             }, 100);
             
-            // Save initial data
             setTimeout(saveSessionData, 1000);
         });
     </script>
