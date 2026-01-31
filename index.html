@@ -1514,11 +1514,11 @@ Mulai mengisi form di sebelah kiri untuk melihat preview laporan</textarea>
             
             report += `Selamat ${waktuSalam}, Mohon ijin melaporkan Situasi Satuan Koramil 1609-05/Sukasada Hari ${dateInfo.hari} Tanggal, ${dateInfo.tanggal} ${dateInfo.bulan} ${dateInfo.tahun} Pukul ${reportTime} Wita dalam rangka kegiatan Pembinaan Kekuatan Satuan Bulan ${dateInfo.bulan} tahun ${dateInfo.tahun} sebagai berikut :\n\n`;
             
-            report += `**I. Situasi dan Haljol :**\n\n`;
+            report += `*I. Situasi dan Haljol :*\n\n`;
             report += `${situasiText}\n\n`;
             report += `-Haljol : ${haljol}.\n\n`;
             
-            report += `**II. Data Siap Ops :**\n\n`;
+            report += `*II. Data Siap Ops :*\n\n`;
             report += `1. Top DSPP : ${topDspp}\n`;
             report += `2. Nyata : ${nyata}\n`;
             report += `3. Kurang : ${kurang}\n`;
@@ -1532,8 +1532,8 @@ Mulai mengisi form di sebelah kiri untuk melihat preview laporan</textarea>
                 }
             });
             
-            report += `\n**III. Kegiatan :**\n\n`;
-            report += `**1. Kegiatan Danramil :**\n\n`;
+            report += `\n*III. Kegiatan :*\n\n`;
+            report += `*1. Kegiatan Danramil :*\n\n`;
             
             if (danramil) {
                 report += `${danramil}\n\n`;
@@ -1542,7 +1542,7 @@ Mulai mengisi form di sebelah kiri untuk melihat preview laporan</textarea>
                 report += `-Memimpin kegiatan rutin satuan Koramil 1609-05/Sukasada.\n\n`;
             }
             
-            report += `**2. Kegiatan Koramil :**\n\n`;
+            report += `*2. Kegiatan Koramil :*\n\n`;
             if (koramil) {
                 report += `${koramil}\n\n`;
             } else {
@@ -1551,7 +1551,7 @@ Mulai mengisi form di sebelah kiri untuk melihat preview laporan</textarea>
             
             report += `-Para Babinsa monitoring terkait perkembangan situasi dan kondisi di wilayah Desa binaan masing-masing.\n\n`;
             
-            report += `**3. Kegiatan Babinsa :**\n\n`;
+            report += `*3. Kegiatan Babinsa :*\n\n`;
             if (babinsa) {
                 report += `${babinsa}\n\n`;
             } else {
@@ -1559,7 +1559,7 @@ Mulai mengisi form di sebelah kiri untuk melihat preview laporan</textarea>
                 report += `-Melaksanakan koordinasi dengan perangkat desa setempat.\n\n`;
             }
             
-            report += `*DEMIKIAN MMP.*\n\n`;
+            report += `*DEMIKIAN MMP.*\n`;
             report += `Dokumentasi terlampir.`;
             
             // Display report
